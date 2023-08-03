@@ -6,7 +6,7 @@ import androidx.annotation.Keep
  *
  * @author jianchong.hu
  * @create at
- * @description:
+ * @description: ① 我们可以用interface先定义一个抽象的UI State、events，event和intent是一个意思，都可以用来表示一次事件。
  **/
 
 @Keep

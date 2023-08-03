@@ -44,6 +44,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>({
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        //直接调用sendUiIntent就可以发送Intent事件
         binding.button.setOnClickListener {
             mViewModel.sendUiIntent(MainIntent.GetBanner)
             mViewModel.sendUiIntent(MainIntent.GetDetail(0))
@@ -63,6 +64,10 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>({
                 }
             }
         }
+
+        //在lifecycleScope中开启协程，collect uiStateFlow。
+        //使用map 来做局部变量的更新
+        //使用distinctUntilChanged来做数据防抖
         lifecycleScope.launchWhenStarted {
             mViewModel.uiStateFlow.map { it.bannerUiState }
                 .collect { bannerUiState ->
@@ -81,6 +86,8 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>({
                     }
                 }
         }
+
+        // mViewModel.uiStateFlow.map { it.detailUiState }.distinctUntilChanged().collect { detailUiState ->
         lifecycleScope.launchWhenStarted {
             mViewModel.uiStateFlow.map { it.detailUiState }
                 .collect { detailUiState ->

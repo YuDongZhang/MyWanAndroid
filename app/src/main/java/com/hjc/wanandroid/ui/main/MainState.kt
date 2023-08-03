@@ -7,7 +7,8 @@ import com.hjc.wanandroid.model.bean.Banner
 /**
  * @author jianchong.hu
  * @create at 2022 12.12
- * @description:
+ * @description: ② 然后根据具体逻辑定义页面的UIState和UiIntent。
+ * 通过MainState将页面的不同状态封装起来，从而实现唯一可信数据源
  **/
 data class MainState(val bannerUiState: BannerUiState, val detailUiState: DetailUiState) : IUiState
 
